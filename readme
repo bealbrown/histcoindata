@@ -1,0 +1,9 @@
+
+
+
+install python 3.6
+install python 3.6-dev
+install pip
+install pipenv
+cd to dir
+pipenv install
