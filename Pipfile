@@ -1,0 +1,25 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[dev-packages]
+
+
+
+[packages]
+
+scrapy = "*"
+pandas = "*"
+"html5lib" = "*"
+"bs4" = "*"
+datetime = "*"
+python-dateutil = "*"
+sqlalchemy = "*"
+
+
+[requires]
+
+python_version = "3.6"
