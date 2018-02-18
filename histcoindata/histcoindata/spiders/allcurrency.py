@@ -24,7 +24,7 @@ class AllcurrencySpider(scrapy.Spider):
         for link in LinkExtractor(allow=(r'currencies'), deny=(r'markets')).extract_links(response):
 
             yield scrapy.Request(
-                "https://coinmarketcap.com/currencies/hyper-tv/historical-data/?start=20100101&end=20200101",
+                link.url + "historical-data/?start=20100101&end=20200101",
                 callback=self.hist_to_df
             )
 
