@@ -9,10 +9,10 @@ import pandas
 from pandas.io import sql
 from sqlalchemy import create_engine
 
-# def df_to_sql(df, date):
-#     disk_engine = create_engine('sqlite:///histcoinprices.db')
-#     df.to_sql(date.strftime('%Y%b%d'), disk_engine, if_exists='append')
+def df_to_sql(df, nameofcoin):
 
+    disk_engine = create_engine('sqlite:///histcoinprices.db')
+    df.to_sql(nameofcoin, disk_engine, if_exists='append')
 
 class AllcurrencySpider(scrapy.Spider):
     name = 'allcurrency'
@@ -24,25 +24,23 @@ class AllcurrencySpider(scrapy.Spider):
         for link in LinkExtractor(allow=(r'currencies'), deny=(r'markets')).extract_links(response):
 
             yield scrapy.Request(
-                link.url + "/historical-data/?start=20100101&end=20200101",
+                "https://coinmarketcap.com/currencies/hyper-tv/historical-data/?start=20100101&end=20200101",
                 callback=self.hist_to_df
             )
 
     def hist_to_df(self, response):
 
-        table = response.css('table.table').extract()
+        nameofcoin = re.search('currencies/(.*)/historical-data', response.url)
+        nameofcoin = nameofcoin.group(1)
 
-        # regex = re.compile(r'(?:Historical Snapshot - )(.*?[0-9]{4})', re.I)
-        # date = regex.search(str(response.body)).groups()
-        # date = datetime.strptime(date[0], '%B %d, %Y')
+        table = response.css('table.table').extract()
 
         table = ''.join(table).replace("\n","")
 
         df = pandas.read_html(table)
-        # df = df[0] # read html returns list of dataframes, so have to get first (and only) one
+        df = df[0] # read html returns list of dataframes, so have to get first (and only) one
 
-        # return (df_to_sql(df,date))
-        print (df)
+        return (df_to_sql(df,nameofcoin))
 
 
 

@@ -11,6 +11,7 @@ name = "pypi"
 
 [packages]
 
+twisted = "*"
 scrapy = "*"
 pandas = "*"
 "html5lib" = "*"
@@ -18,6 +19,7 @@ pandas = "*"
 datetime = "*"
 python-dateutil = "*"
 sqlalchemy = "*"
+
 
 
 [requires]
