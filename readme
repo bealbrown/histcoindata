@@ -1,9 +1,10 @@
 
-
-
-install python 3.6
-install python 3.6-dev
-install pip
-install pipenv
-cd to dir
+sudo add-apt-repository ppa:jonathonf/python-3.6
+sudo apt-get update
+sudo apt-get install python3.6
+sudo apt-get install python 3.6-dev
+sudo apt-get install pip
+pip3 install pipenv
+sudo apt-get install sqlite3
+cd histcoindata
 pipenv install
