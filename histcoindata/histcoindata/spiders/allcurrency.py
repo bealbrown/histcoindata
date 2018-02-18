@@ -31,7 +31,7 @@ class AllcurrencySpider(scrapy.Spider):
     def hist_to_df(self, response):
 
         nameofcoin = re.search('currencies/(.*)/historical-data', response.url)
-        nameofcoin = nameofcoin.group(1)
+        nameofcoin = nameofcoin.group(1).replace("-", "_")
 
         table = response.css('table.table').extract()
 
